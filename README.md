@@ -37,7 +37,7 @@ Este proyecto sirve como un arquetipo base para la creación de microservicios e
 ### **1. Clonar el repositorio**
 ```bash
 git clone https://github.com/ninkovski/backend-java-template.git
-cd bootcamp-api-bank
+cd backend-java-template
 ```
 
 ### **2. Construcción y ejecución**
