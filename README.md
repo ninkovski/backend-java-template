@@ -66,5 +66,5 @@ Para ambos puedes acceder a la API a través de
 - **Maven 3+**
 - **Docker (opcional para despliegue con contenedores)**
 
-## **Licencia**
+### **Licencia**
 Este proyecto es de código abierto y puede ser utilizado libremente para aprendizaje y desarrollo.
