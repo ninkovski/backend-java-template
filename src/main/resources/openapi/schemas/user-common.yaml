@@ -1,0 +1,43 @@
+components:
+  schemas:
+    UserLoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    UserRegisterRequest:
+      type: object
+      required: [username, email, password]
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    UserPasswordUpdateRequest:
+      type: object
+      required: [new_password]
+      properties:
+        new_password:
+          type: string
+          description: Nueva contraseña a establecer
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        created_at:
+          type: string
+          format: date-time

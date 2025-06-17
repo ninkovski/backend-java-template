@@ -1,0 +1,23 @@
+components:
+  parameters:
+    TransactionIdHeader:
+      name: X-Transaction-Id
+      in: header
+      required: true
+      description: >
+        Identificador único de la transacción para trazabilidad.
+        Este valor debe ser generado por el sistema cliente e incluido en cada solicitud.
+      schema:
+        type: string
+        example: 7c55d8fc-3f9a-4b3f-8c1e-922b1f57d2e9
+
+    OriginServiceHeader:
+      name: X-Origin-Service
+      in: header
+      required: true
+      description: >
+        Nombre del microservicio o cliente que hace la llamada.
+        Útil para trazabilidad, métricas y seguridad.
+      schema:
+        type: string
+        example: bootcamp-back-sync-user-service

@@ -1,0 +1,105 @@
+openapi: 3.0.3
+info:
+  title: User Service API
+  version: 1.0.0
+  description: API para autenticación y gestión de usuarios
+components:
+  parameters:
+    TransactionIdHeader:
+      $ref: '../schemas/headers.yaml#/components/parameters/TransactionIdHeader'
+    OriginServiceHeader:
+      $ref: '../schemas/headers.yaml#/components/parameters/OriginServiceHeader'
+  responses:
+    UnauthorizedError:
+      description: Token inválido o expirado
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/validations.yaml#/components/schemas/ErrorResponse'
+    NotFoundError:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/validations.yaml#/components/schemas/ErrorResponse'
+
+paths:
+  /users/login:
+    post:
+      tags:
+        - UserService
+      summary: Login de usuario
+      parameters:
+        - $ref: '#/components/parameters/TransactionIdHeader'
+        - $ref: '#/components/parameters/OriginServiceHeader'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/user-common.yaml#/components/schemas/UserLoginRequest'
+      responses:
+        '200':
+          description: Login exitoso (retorna JWT)
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /users/{id}:
+    get:
+      tags:
+        - UserService
+      summary: Obtener usuario por ID
+      parameters:
+        - $ref: '#/components/parameters/TransactionIdHeader'
+        - $ref: '#/components/parameters/OriginServiceHeader'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalle del usuario
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+  /users/register:
+    post:
+      tags:
+        - UserService
+      summary: Registrar nuevo usuario
+      parameters:
+        - $ref: '#/components/parameters/TransactionIdHeader'
+        - $ref: '#/components/parameters/OriginServiceHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/user-common.yaml#/components/schemas/UserRegisterRequest'
+      responses:
+        '201':
+          description: Usuario registrado correctamente
+
+  /users/password/{id}:
+    put:
+      tags:
+        - UserService
+      summary: Actualizar contraseña de usuario
+      parameters:
+        - $ref: '#/components/parameters/TransactionIdHeader'
+        - $ref: '#/components/parameters/OriginServiceHeader'
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '../schemas/user-common.yaml#/components/schemas/UserPasswordUpdateRequest'
+      responses:
+        '200':
+          description: Contraseña actualizada
+        '404':
+          $ref: '#/components/responses/NotFoundError'

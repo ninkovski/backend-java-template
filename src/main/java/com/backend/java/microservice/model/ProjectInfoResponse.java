@@ -15,6 +15,6 @@ public class ProjectInfoResponse {
     @Schema(description = "Nombre de la aplicación", example = "backend-service")
     private String appName;
 
-    @Schema(description = "Versión del servicio", example = "1.0")
+    @Schema(description = "Versión del servicio", example = "1.0.0")
     private String version;
 }
