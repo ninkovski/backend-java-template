@@ -1,0 +1,82 @@
+components:
+  schemas:
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Código de error técnico o identificador del fallo
+          example: TRANSACTION_NOT_FOUND
+        message:
+          type: string
+          description: Descripción legible del error
+          example: La transacción no fue encontrada
+
+    ValidationErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+        - errors
+      properties:
+        code:
+          type: string
+          example: VALIDATION_FAILED
+        message:
+          type: string
+          example: Uno o más campos tienen errores de validación
+        errors:
+          type: array
+          items:
+            type: object
+            required: [field, message]
+            properties:
+              field:
+                type: string
+                example: from_account
+              message:
+                type: string
+                example: La cuenta de origen es obligatoria
+
+    UnauthorizedErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: UNAUTHORIZED
+        message:
+          type: string
+          example: Token inválido o expirado
+
+    NotFoundErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: NOT_FOUND
+        message:
+          type: string
+          example: Recurso no encontrado
+
+    UnprocessableEntityErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          example: UNPROCESSABLE_ENTITY
+        message:
+          type: string
+          example: El tipo de transacción no está permitido

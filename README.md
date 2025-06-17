@@ -1,10 +1,14 @@
 
-# MS Base - Arquetipo para Microservicios
+# MS Base - Arquetipo para Microservicios - Contract First
 
 ## **Descripción**
-Este proyecto sirve como un arquetipo base para la creación de microservicios en Java con Spring Boot. Está diseñado para proporcionar a los desarrolladores una estructura inicial robusta y optimizada que facilite la construcción de aplicaciones distribuidas de manera rápida y escalable. Con configuraciones predefinidas y buenas prácticas incorporadas, como seguridad integrada, documentación automática de la API mediante Swagger, y monitoreo a través de Health Check, este proyecto base es ideal para cualquier equipo que quiera implementar microservicios con una arquitectura limpia y eficiente.
+
+Esta plantilla está preparada para crear microservicios Java con **Spring Boot** siguiendo el enfoque **Contract-First**. Toda la configuración necesaria ya está integrada para que solo tengas que reemplazar el archivo de contrato OpenAPI (`.yaml`) y generar automáticamente el código base (controladores, modelos, etc.).
+
+Ideal para equipos que buscan mantener **consistencia en sus APIs**, aplicar **desarrollo guiado por contrato** y documentar de forma profesional desde el inicio.
 
 ## **Características Principales**
+- Contrato Openapi para generar clases del controller
 - Configuración centralizada con **Spring Cloud Config Server**.
 - Documentación de APIs con **Springdoc OpenAPI (Swagger UI)**.
 - Endpoint para obtener información del proyecto (ambiente, ruta de OpenAPI, etc.).
@@ -22,7 +26,9 @@ Este proyecto sirve como un arquetipo base para la creación de microservicios e
  │   │   ├── model/        # Entidades y DTOs
  │   │   ├── util/         # Clases de utilidad
  │   ├── resources
- │   │   ├── application.yml  # Configuración principal
+ ├   │   ├── openapi/        # Carpeta donde colocar tu contrato YAML
+ ├   │   │   └── api-contract.yaml  # Reemplaza este archivo
+ ├   │   └── application.yml
  ├── test/                    # Pruebas unitarias
 ```
 
@@ -34,13 +40,39 @@ Este proyecto sirve como un arquetipo base para la creación de microservicios e
 | GET    | `/swagger-ui.html`  | Accede a la documentación de OpenAPI. |
 
 ## **Configuración y Ejecución**
+
 ### **1. Clonar el repositorio**
 ```bash
 git clone https://github.com/ninkovski/backend-java-template.git
 cd backend-java-template
 ```
 
-### **2. Construcción y ejecución**
+### **2. Reemplaza el contrato OpenAPI**
+Ubica tu archivo OpenAPI (por ejemplo `user-service.yaml`) en:
+```bash
+src/main/resources/openapi/api-contract.yaml
+```
+
+### **3. 🧬 Genera el código desde la terminal**
+Usa [OpenAPI Generator CLI](https://openapi-generator.tech/) para generar automáticamente el código base:
+```bash
+openapi-generator-cli generate   -i src/main/resources/openapi/api-contract.yaml   -g spring   -o .   --additional-properties=interfaceOnly=true,useTags=true,skipDefaultInterface=true
+```
+
+### 🧠 Alternativa: Importar directamente desde IntelliJ IDEA
+
+También puedes importar el contrato OpenAPI (`.yaml`) directamente desde IntelliJ IDEA:
+
+1. Haz clic derecho en el archivo YAML → `OpenAPI → Generate Server Code`
+2. Selecciona `Spring` como framework.
+3. Elige la ruta de salida (`src/main/java`, por ejemplo).
+4. IntelliJ generará automáticamente los controladores, modelos y las interfaces.
+
+🔒 Asegúrate de que tienes instalado el plugin **OpenAPI Generator** en IntelliJ.
+
+---
+
+### **4. Construcción y ejecución**
 ```bash
 mvn clean install
 mvn spring-boot:run
@@ -55,7 +87,7 @@ docker build --build-arg APP_NAME=backend-service --build-arg APP_PORT=8080 -t b
 docker run -e APP_NAME=backend-service -e APP_PORT=8080 -p 8080:8080 backend-service
 ```
 
-### **3. Acceder a la API**
+### **5. Acceder a la API**
 Para ambos puedes acceder a la API a través de
 
 - Swagger UI: `http://localhost:8080/backend-service/v1/swagger-ui.html`
@@ -65,6 +97,14 @@ Para ambos puedes acceder a la API a través de
 - **Java 17**
 - **Maven 3+**
 - **Docker (opcional para despliegue con contenedores)**
+- **OpenAPI Generator CLI o plugin de IntelliJ IDEA**
 
-## **Licencia**
+### **Licencia**
 Este proyecto es de código abierto y puede ser utilizado libremente para aprendizaje y desarrollo.
+
+
+### **Tips**
+
+- Puedes versionar los contratos YAML para asegurar compatibilidad.
+- Ideal para CI/CD contract-testing.
+- Puedes conectar esto con herramientas como Microcks o Spring Cloud Contract si quieres validar contratos en producción.

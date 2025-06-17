@@ -58,6 +58,22 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.annotation</groupId>
+			<artifactId>jakarta.annotation-api</artifactId>
+			<version>2.1.1</version> <!-- compatible con JDK modernos -->
+		</dependency>
+		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>0.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.0.0</version> <!-- Compatible con Java 21 -->
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
@@ -84,6 +100,47 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.3.0</version>
+				<executions>
+					<execution>
+						<id>user-service</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/openapi/sync/sync-user-service.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<output>${project.build.directory}/generated-sources/user-service</output>
+
+							<!-- Paquetes -->
+							<apiPackage>com.contract.api</apiPackage>
+							<modelPackage>com.contract.model</modelPackage>
+							<!-- Opciones de configuración -->
+							<configOptions>
+								<interfaceOnly>false</interfaceOnly>
+								<useTags>true</useTags>
+								<dateLibrary>java17</dateLibrary>
+								<library>spring-boot</library>
+								<useSpringBoot3>true</useSpringBoot3>
+								<useSpringController>true</useSpringController>
+								<apiNameSuffix>Controller</apiNameSuffix>
+							</configOptions>
+
+							<additionalProperties>
+								<jakarta>true</jakarta>
+							</additionalProperties>
+
+							<generateModelTests>false</generateModelTests>
+							<generateApiTests>false</generateApiTests>
+							<generateSupportingFiles>true</generateSupportingFiles>
+							<supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
