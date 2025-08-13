@@ -10,11 +10,11 @@ components:
         code:
           type: string
           description: Código de error técnico o identificador del fallo
-          example: TRANSACTION_NOT_FOUND
+          example: TRANSACTION_ERROR
         message:
           type: string
           description: Descripción legible del error
-          example: La transacción no fue encontrada
+          example: La transacción no se pudo completar
 
     ValidationErrorResponse:
       type: object
