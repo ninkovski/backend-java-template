@@ -11,7 +11,7 @@ components:
       $ref: '../schemas/headers.yaml#/components/parameters/OriginServiceHeader'
   responses:
     UnauthorizedError:
-      description: Token inválido o expirado
+      description: Token contraseña incorrecta
       content:
         application/json:
           schema:
@@ -40,6 +40,10 @@ paths:
       responses:
         '200':
           description: Login exitoso (retorna JWT)
+          content:
+            application/json:
+              schema:
+                $ref: '../schemas/user-common.yaml#/components/schemas/LoginResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedError'
 

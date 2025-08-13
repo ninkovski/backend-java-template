@@ -41,3 +41,21 @@ components:
         created_at:
           type: string
           format: date-time
+
+    LoginResponse:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: Token JWT generado
+        expiresIn:
+          type: integer
+          format: int64
+          description: Tiempo de expiración del token en segundos
+        tokenType:
+          type: string
+          description: Tipo de token, normalmente "Bearer"
+      example:
+        jwt: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        expiresIn: 3600
+        tokenType: "Bearer"

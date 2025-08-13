@@ -53,7 +53,7 @@ components:
           example: UNAUTHORIZED
         message:
           type: string
-          example: Token inválido o expirado
+          example: Contraseña incorrecta
 
     NotFoundErrorResponse:
       type: object
