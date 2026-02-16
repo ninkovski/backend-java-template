@@ -3,6 +3,9 @@ package com.backend.java.microservice.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -37,11 +40,22 @@ public class SwaggerConfig {
             log.error("No se encontró README.md, usando descripción por defecto.");
         }
 
+        // Definir security scheme para X-API-KEY en header
+        SecurityScheme apiKeyScheme = new SecurityScheme()
+                .type(SecurityScheme.Type.APIKEY)
+                .in(SecurityScheme.In.HEADER)
+                .name("X-API-KEY");
+
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList("ApiKeyAuth");
+
         return new OpenAPI()
+                .components(new Components().addSecuritySchemes("ApiKeyAuth", apiKeyScheme))
+                .addSecurityItem(securityRequirement)
                 .info(new Info()
                         .title(applicationName)  // Obtiene el nombre de la aplicación desde application.yml
                         .version(version)
                         .description(readmeContent)  // Insertar el contenido del README aquí
                         .license(new License().name("By Ninkovski").url("https://github.com/ninkovski")));
     }
+
 }

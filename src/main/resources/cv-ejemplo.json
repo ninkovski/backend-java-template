@@ -1,0 +1,78 @@
+{
+  "profile": {
+    "fullName": "Ninkovski Morales Janampa",
+    "role": "Senior Software Engineer | Technical Leader",
+    "summary": "Ingeniero Mecatrónico y Desarrollador Senior con sólida experiencia en Java, Spring Boot y Cloud Computing (Azure). Referente técnico en NTT DATA para el cliente BCP, con capacidad de liderazgo, formación de talento y diseño de bootcamps.",
+    "linkedinUrl": "https://www.linkedin.com/in/ninkovski-morales-2681701ab",
+    "githubUrl": "https://github.com/ninkovski",
+    "experiences": [
+      {
+        "company": "NTT DATA (Cliente BCP)",
+        "position": "Software Engineer / Senior Software Developer",
+        "startDate": "Noviembre 2024",
+        "endDate": "Presente",
+        "highlights": [
+          "Implementación de Azure Data Factory y Azure Functions.",
+          "Diseño y aprovisionamiento de microservicios con Java 11, Spring Boot y RxJava.",
+          "Integración de servicios vía Open API y Kafka para optimizar latencia.",
+          "Aplicación de Clean Code, SOLID y Code Reviews en entorno Scrum.",
+          "Dictado de 6 capacitaciones técnicas y de habilidades blandas."
+        ]
+      },
+      {
+        "company": "Pandero",
+        "position": "Software Development Analyst / Technical Lead",
+        "startDate": "Febrero 2021",
+        "endDate": "Noviembre 2024",
+        "highlights": [
+          "Gestión de proyectos evolutivos y manejo de backlog de microservicios.",
+          "Mentoría a practicantes y analistas junior.",
+          "Ganador del Hackathon Pandero 2024 con el proyecto 'Simulador Pandero Casa'."
+        ]
+      },
+      {
+        "company": "Public Prosecutor's Office (Ministerio Público)",
+        "position": "Consultant - Java Analyst Programmer",
+        "startDate": "2019",
+        "endDate": "2021",
+        "highlights": [
+          "Liderazgo en la implementación de microservicios y ciclo de vida de software.",
+          "Migración e integración de bases de datos de Sybase a PostgreSQL.",
+          "Desarrollo de frontend para gestión de alertas tempranas."
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "name": "Java / Spring Boot",
+        "level": "Expert",
+        "years": 6
+      },
+      {
+        "name": "Azure (Functions, Data Factory)",
+        "level": "Advanced",
+        "years": 3
+      },
+      {
+        "name": "Microservicios (Kafka, REST, SOAP)",
+        "level": "Expert",
+        "years": 5
+      },
+      {
+        "name": "Cloud Architecture (AZ-900, AZ-204)",
+        "level": "Certified",
+        "years": 2
+      },
+      {
+        "name": "SQL (SQL Server, PostgreSQL, Sybase)",
+        "level": "Advanced",
+        "years": 6
+      },
+      {
+        "name": "DevOps (Docker, Jenkins, GitHub Actions)",
+        "level": "Intermediate",
+        "years": 3
+      }
+    ]
+  }
+}

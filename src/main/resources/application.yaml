@@ -12,9 +12,14 @@ server:
   port: 8080
 app:
   version: 1.0.0
+  cors:
+    # Cambia este valor a los orígenes que quieras permitir (puede ser una lista separada por comas)
+    allowed-origins: "http://localhost:3000"
+  security:
+    # Cambia esta clave por la API key que quieras usar en producción
+    api-key: "my-secret-key"
 springdoc:
   api-docs:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
-

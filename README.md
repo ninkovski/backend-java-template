@@ -1,70 +1,68 @@
-
 # MS Base - Arquetipo para Microservicios
 
-## **Descripción**
-Este proyecto sirve como un arquetipo base para la creación de microservicios en Java con Spring Boot. Está diseñado para proporcionar a los desarrolladores una estructura inicial robusta y optimizada que facilite la construcción de aplicaciones distribuidas de manera rápida y escalable. Con configuraciones predefinidas y buenas prácticas incorporadas, como seguridad integrada, documentación automática de la API mediante Swagger, y monitoreo a través de Health Check, este proyecto base es ideal para cualquier equipo que quiera implementar microservicios con una arquitectura limpia y eficiente.
+## Descripción
+Proyecto base para aprender a construir microservicios en Java con Spring Boot. Incluye:
+- Documentación automática con Swagger (springdoc OpenAPI).
+- Precarga de datos desde un JSON de ejemplo (cv-ejemplo.json) usando JPA/H2.
+- Validación de API Key mediante un filtro HTTP (X-API-KEY).
+- Ejemplos de DTOs y entidades JPA para un currículum (Profile, Experience, Skill).
 
-## **Características Principales**
-- Configuración centralizada con **Spring Cloud Config Server**.
-- Documentación de APIs con **Springdoc OpenAPI (Swagger UI)**.
-- Endpoint para obtener información del proyecto (ambiente, ruta de OpenAPI, etc.).
-- Health Check para monitoreo del estado de la aplicación.
+## Requisitos
+- Java 17
+- Maven
 
-## **Estructura del Proyecto**
-```plaintext
-/src
- ├── main
- │   ├── java/com/bootcamp/api
- │   │   ├── config/       # Configuración del proyecto 
- │   │   ├── controller/   # Controladores REST
- │   │   ├── service/      # Lógica de negocio
- │   │   ├── repository/   # Acceso a datos
- │   │   ├── model/        # Entidades y DTOs
- │   │   ├── util/         # Clases de utilidad
- │   ├── resources
- │   │   ├── application.yml  # Configuración principal
- ├── test/                    # Pruebas unitarias
-```
+## Ejecutar la aplicación
+1. Compilar y ejecutar:
+   mvn -DskipTests package
+   mvn spring-boot:run
 
-## **Endpoints Iniciales**
-| Método | Endpoint            | Descripción |
-|--------|---------------------|-------------|
-| GET    | `/actuator/health`  | Verifica el estado del servicio. |
-| GET    | `/api/info`         | Devuelve información sobre el entorno del proyecto. |
-| GET    | `/swagger-ui.html`  | Accede a la documentación de OpenAPI. |
+2. Base URL de la API:
+   http://localhost:8080/backend-service/v1
 
-## **Configuración y Ejecución**
-### **1. Clonar el repositorio**
-```bash
-git clone https://github.com/ninkovski/backend-java-template.git
-cd bootcamp-api-bank
-```
+## Endpoints principales
+- GET /api/resume
+  - Devuelve el ProfileDTO como JSON (perfil, experiencias, skills).
+  - Requiere header HTTP X-API-KEY.
 
-### **2. Construcción y ejecución**
-```bash
-mvn clean install
-mvn spring-boot:run
-```
-Si prefieres ejecutar la aplicación dentro de un contenedor Docker, puedes seguir estos pasos:
+## Swagger UI (documentación)
+1. Abrir:
+   http://localhost:8080/backend-service/v1/swagger-ui.html
+2. Para probar endpoints protegidos por X-API-KEY:
+   - Hacer clic en "Authorize" (candado) en la UI.
+   - Introducir la API key (valor definido en application.yaml -> app.security.api-key).
+   - Después de autorizar, las llamadas desde Swagger incluirán el header X-API-KEY.
 
-#### **Construir la imagen de Docker**
-Ejecuta el siguiente comando en la raíz del proyecto para construir la imagen Docker. Asegúrate de que el Dockerfile esté configurado correctamente:
+## Ejemplos curl
+- Petición válida (reemplaza my-secret-key por la configured en application.yaml):
+  curl -H "X-API-KEY: my-secret-key" http://localhost:8080/backend-service/v1/api/resume
 
-```bash
-docker build --build-arg APP_NAME=backend-service --build-arg APP_PORT=8080 -t backend-service .
-docker run -e APP_NAME=backend-service -e APP_PORT=8080 -p 8080:8080 backend-service
-```
+- Petición sin key (respuesta 401 con JSON de error):
+  curl http://localhost:8080/backend-service/v1/api/resume
 
-### **3. Acceder a la API**
-Para ambos puedes acceder a la API a través de
+## Configuración importante
+- API key esperada:
+  - application.yaml -> app.security.api-key
+- CORS (orígenes permitidos para Swagger / frontends):
+  - application.yaml -> app.cors.allowed-origins (por ejemplo "http://localhost:3000")
 
-- Swagger UI: `http://localhost:8080/backend-service/v1/swagger-ui.html`
-- Health Check: `http://localhost:8080/backend-service/v1/actuator/health`
+## Datos de ejemplo y carga inicial
+- El archivo `src/main/resources/cv-ejemplo.json` contiene un currículum de ejemplo.
+- Al iniciar la aplicación, un componente (ResumeDataLoader) parsea el JSON y lo persiste en la base de datos H2 usando JPA.
+- Puedes inspeccionar las tablas en H2 Console (si la habilitas) o mediante queries en código.
 
-## **Requisitos**
-- **Java 17**
-- **Maven 3+**
-- **Docker (opcional para despliegue con contenedores)**
+## Estructura educativa (qué revisar en el código)
+- DTOs: `com.backend.java.microservice.model.dto` (ProfileDTO, ExperienceDTO, SkillDTO)
+- Entidades JPA: `com.backend.java.microservice.model.entity` (ProfileEntity, ExperienceEntity, SkillEntity, ExperienceHighlightEntity)
+- Repositorio: `com.backend.java.microservice.repository.ProfileRepository`
+- Servicio: `com.backend.java.microservice.service.ResumeService` (mappea entidades a DTOs)
+- Precarga: `com.backend.java.microservice.service.ResumeDataLoader`
+- Seguridad: `com.backend.java.microservice.security.ApiKeyFilter`
+- Documentación OpenAPI: `com.backend.java.microservice.config.SwaggerConfig`
 
-### **Licencia**
-Este proyecto es de código abierto y puede ser utilizado libremente para aprendizaje y desarrollo.
+## Notas para la clase
+- Recomendación: reimportar el proyecto Maven en el IDE después de modificar `pom.xml`.
+- Para desarrollo rápido puedes activar `spring.jpa.hibernate.ddl-auto: update` en application.yaml.
+- Si se usan cambios en seguridad (Spring Security), ajustar el orden y exposición de endpoints de Swagger.
+
+---
+Si necesitan que agregue un ejercicio guía (por ejemplo: crear un endpoint POST para agregar skills y una prueba de integración), lo incorporo al README con pasos y tests de ejemplo.
