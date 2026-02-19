@@ -32,3 +32,12 @@ CREATE TABLE IF NOT EXISTS skills (
   years INT,
   CONSTRAINT fk_profile_skill FOREIGN KEY(profile_id) REFERENCES profile(id)
 );
+
+CREATE TABLE IF NOT EXISTS certifications (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  profile_id INT,
+  name VARCHAR(255),
+  provider VARCHAR(255),
+  credential_url VARCHAR(1024),
+  CONSTRAINT fk_profile_certification FOREIGN KEY(profile_id) REFERENCES profile(id)
+);

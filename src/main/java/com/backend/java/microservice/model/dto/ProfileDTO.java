@@ -19,4 +19,5 @@ public class ProfileDTO {
     private String githubUrl;
     private List<ExperienceDTO> experiences;
     private List<SkillDTO> skills;
+    private List<CertificationDTO> certifications;
 }

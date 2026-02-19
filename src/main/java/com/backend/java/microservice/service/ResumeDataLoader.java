@@ -4,6 +4,7 @@ import com.backend.java.microservice.model.entity.ExperienceEntity;
 import com.backend.java.microservice.model.entity.ExperienceHighlightEntity;
 import com.backend.java.microservice.model.entity.ProfileEntity;
 import com.backend.java.microservice.model.entity.SkillEntity;
+import com.backend.java.microservice.model.entity.CertificationEntity;
 import com.backend.java.microservice.repository.ProfileRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -94,6 +95,22 @@ public class ResumeDataLoader {
                                 .profile(profile)
                                 .build();
                         profile.getSkills().add(skill);
+                    }
+                }
+
+                // certifications
+                JsonNode certificationsNode = profileNode.path("certifications");
+                if (certificationsNode.isArray()) {
+                    Iterator<JsonNode> cit = certificationsNode.elements();
+                    while (cit.hasNext()) {
+                        JsonNode cert = cit.next();
+                        CertificationEntity certification = CertificationEntity.builder()
+                                .name(cert.path("name").asText(null))
+                                .provider(cert.path("provider").asText(null))
+                                .credentialUrl(cert.path("credentialUrl").asText(null))
+                                .profile(profile)
+                                .build();
+                        profile.getCertifications().add(certification);
                     }
                 }
 

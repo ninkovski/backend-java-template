@@ -59,7 +59,7 @@
         "years": 5
       },
       {
-        "name": "Cloud Architecture (AZ-900, AZ-204)",
+        "name": "Cloud Architecture Azure",
         "level": "Certified",
         "years": 2
       },
@@ -72,6 +72,23 @@
         "name": "DevOps (Docker, Jenkins, GitHub Actions)",
         "level": "Intermediate",
         "years": 3
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Microsoft Certified: Azure Developer Associate (AZ-204)",
+        "provider": "Microsoft",
+        "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/327DBD9C33C85C3F?sharingId=964BD4C6CB95AC7E"
+      },
+      {
+        "name": "GitHub Copilot Certification",
+        "provider": "Microsoft",
+        "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/EFF7C67C1B2826E6?sharingId=964BD4C6CB95AC7E"
+      },
+      {
+        "name": "Microsoft Certified: Azure Fundamentals (AZ-900)",
+        "provider": "Microsoft",
+        "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/EDF022B7692FCEFD?sharingId=964BD4C6CB95AC7E"
       }
     ]
   }

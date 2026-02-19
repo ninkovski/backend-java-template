@@ -1,8 +1,10 @@
 package com.backend.java.microservice.service;
 
+import com.backend.java.microservice.model.dto.CertificationDTO;
 import com.backend.java.microservice.model.dto.ExperienceDTO;
 import com.backend.java.microservice.model.dto.ProfileDTO;
 import com.backend.java.microservice.model.dto.SkillDTO;
+import com.backend.java.microservice.model.entity.CertificationEntity;
 import com.backend.java.microservice.model.entity.ExperienceEntity;
 import com.backend.java.microservice.model.entity.ProfileEntity;
 import com.backend.java.microservice.model.entity.SkillEntity;
@@ -38,9 +40,11 @@ public class ResumeService {
 
         List<ExperienceDTO> experiences = profile.getExperiences().stream().map(this::mapExperience).collect(Collectors.toList());
         List<SkillDTO> skills = profile.getSkills().stream().map(this::mapSkill).collect(Collectors.toList());
+        List<CertificationDTO> certifications = profile.getCertifications().stream().map(this::mapCertification).collect(Collectors.toList());
 
         dto.setExperiences(experiences);
         dto.setSkills(skills);
+        dto.setCertifications(certifications);
         return dto;
     }
 
@@ -60,6 +64,14 @@ public class ResumeService {
                 .name(s.getName())
                 .level(s.getLevel())
                 .years(s.getYears())
+                .build();
+    }
+
+    private CertificationDTO mapCertification(CertificationEntity c) {
+        return CertificationDTO.builder()
+                .name(c.getName())
+                .provider(c.getProvider())
+                .credentialUrl(c.getCredentialUrl())
                 .build();
     }
 }
