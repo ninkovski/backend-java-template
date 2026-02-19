@@ -54,7 +54,7 @@
         "years": 3
       },
       {
-        "name": "Microservicios (Kafka, REST, SOAP)",
+        "name": "Microservicios (REST, SOAP)",
         "level": "Expert",
         "years": 5
       },
@@ -76,19 +76,19 @@
     ],
     "certifications": [
       {
+        "name": "Microsoft Certified: Azure Fundamentals (AZ-900)",
+        "provider": "Microsoft",
+        "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/EDF022B7692FCEFD?sharingId=964BD4C6CB95AC7E"
+      },
+      {
         "name": "Microsoft Certified: Azure Developer Associate (AZ-204)",
         "provider": "Microsoft",
         "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/327DBD9C33C85C3F?sharingId=964BD4C6CB95AC7E"
       },
       {
-        "name": "GitHub Copilot Certification",
+        "name": "GitHub Copilot Certification (GH-300)",
         "provider": "Microsoft",
         "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/EFF7C67C1B2826E6?sharingId=964BD4C6CB95AC7E"
-      },
-      {
-        "name": "Microsoft Certified: Azure Fundamentals (AZ-900)",
-        "provider": "Microsoft",
-        "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/NinkovskiMoralesJanampa-4789/EDF022B7692FCEFD?sharingId=964BD4C6CB95AC7E"
       }
     ]
   }
