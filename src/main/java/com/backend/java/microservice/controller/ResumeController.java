@@ -11,8 +11,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
-@SecurityRequirement(name = "ApiKeyAuth")
 public class ResumeController {
 
     private final ResumeService resumeService;
